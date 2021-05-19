@@ -22,15 +22,16 @@ router.route('/:username').get(middleware.checkToken, (req, res) => {
 router.route('/checkusername/:username').get((req, res) => {
     User.findOne({ username: req.params.username }, (err, result) => {
         if (err) return res.status(500).json({ msg: err });
-        if (result !== null) {
+        if(result !== null) {
 
             return res.json({
                 status: "true",
 
             });
         }
-        else return res.json({
-            status: "true",
+        else 
+        return res.json({
+            status: "false",
 
         }
         );
