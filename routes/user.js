@@ -18,6 +18,29 @@ router.route('/:username').get(middleware.checkToken, (req, res) => {
     });
 });
 
+//Endpoint for checking unique username
+router.route('/checkusername/:username').get((req, res) => {
+    User.findOne({ username: req.params.username }, (err, result) => {
+        if (err) return res.status(500).json({ msg: err });
+        if (result !== null) {
+
+            return res.json({
+                status: "true",
+
+            });
+        }
+        else return res.json({
+            status: "true",
+
+        }
+        );
+
+    });
+});
+
+
+
+
 // Endpoint for Log in  User 
 router.route('/login').post(middleware.checkToken, (req, res) => {
     User.findOne({ username: req.body.username }, (err, result) => {
