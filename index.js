@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const Port = process.env.PORT || 5000
+var cors = require('cors');
+
+
+app.use(cors());
 
 //mongodb://localhost:27017/AppDB--Local Host
 mongoose.connect('mongodb+srv://bloguser:1234@cluster0.uhf9t.mongodb.net/AppDB?retryWrites=true&w=majority', {
