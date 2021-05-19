@@ -23,5 +23,5 @@ app.use(express.json());
 const userRoute = require("./routes/user");
 app.use("/user", userRoute);
 
-app.route('/').get((req, res) => res.json('My First Rest API 2'));
+app.route('/').get((req, res) => res.json({ "msg": "Hello Welcome to my API", "info": "This is the Root" }));
 app.listen(Port, () => console.log(`Your Server is Running on Port ${Port}`));
