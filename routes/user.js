@@ -22,19 +22,19 @@ router.route('/:username').get(middleware.checkToken, (req, res) => {
 router.route('/checkusername/:username').get((req, res) => {
     User.findOne({ username: req.params.username }, (err, result) => {
         if (err) return res.status(500).json({ msg: err });
-        if(result !== null) {
+        if (result !== null) {
 
             return res.json({
                 status: "true",
 
             });
         }
-        else 
-        return res.json({
-            status: "false",
+        else
+            return res.json({
+                status: "false",
 
-        }
-        );
+            }
+            );
 
     });
 });
@@ -43,7 +43,7 @@ router.route('/checkusername/:username').get((req, res) => {
 
 
 // Endpoint for Log in  User 
-router.route('/login').post(middleware.checkToken, (req, res) => {
+router.route('/login').post( (req, res) => {
     User.findOne({ username: req.body.username }, (err, result) => {
         if (err) res.status(500).json({ msg: err });
 
@@ -55,6 +55,7 @@ router.route('/login').post(middleware.checkToken, (req, res) => {
             let token = jwt.sign({ username: req.body.username }, config.key, {
                 expiresIn: "7d" //Expires in 24hrs
             })
+            console.log(token);
             res.json({
                 token: token,
                 msg: 'Success'
@@ -69,7 +70,7 @@ router.route('/login').post(middleware.checkToken, (req, res) => {
 
 
 // Endpoint for Registering a new User 
-router.route('/register').post(middleware.checkToken, (req, res) => {
+router.route('/register').post((req, res) => {
     console.log('Inside the Register');
     const user = new User({
         username: req.body.username,
@@ -95,7 +96,7 @@ router.route('/register').post(middleware.checkToken, (req, res) => {
 );
 
 // Endpoint for updating the Password of User
-router.route('/update/:username').patch(middleware.checkToken, (req, res) => {
+router.route('/update/:username').patch( (req, res) => {
     User.findOneAndUpdate(
         { username: req.params.username },
         { $set: { password: req.body.password } },
