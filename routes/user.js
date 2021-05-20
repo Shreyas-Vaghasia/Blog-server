@@ -53,7 +53,7 @@ router.route('/login').post(middleware.checkToken, (req, res) => {
         }
         if (result.password === req.body.password) {
             let token = jwt.sign({ username: req.body.username }, config.key, {
-                expiresIn: "24h" //Expires in 24hrs
+                expiresIn: "7d" //Expires in 24hrs
             })
             res.json({
                 token: token,
